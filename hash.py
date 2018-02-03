@@ -1,5 +1,6 @@
+filename = 'example.in'
 #filename = 'small.in'
-filename = 'medium.in'
+#filename = 'medium.in'
 
 def googleHash(filename):
     with open(filename) as dataset:
@@ -16,14 +17,20 @@ def googleHash(filename):
 
 
         #Then, the remaining lines
+        countM = 0
+        countT = 0
         for line in dataset:
             lineList = []
             count = 0
             while count < int(requirements[1]):
-                print count
+                if str(line[count]) == "M":
+                    countM+=1
+                if str(line[count]) == "T":
+                    countT+=1
                 lineList.append(line[count])
                 count+=1
             print lineList
+        print ' %s numbers of \'M\' \n %s numbers of \'T\' ' % (countM, countT)
 
 
 
