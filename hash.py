@@ -1,3 +1,5 @@
+import numpy as np
+
 filename = 'example.in'
 #filename = 'small.in'
 #filename = 'medium.in'
