@@ -4,8 +4,10 @@ def googleHash(filename):
         #Manipulating the first line from the dataset
         first_line = dataset.readline()
         print first_line
-        """for line in dataset:
-            print line"""
+
+        #Then, the remaining lines
+        for line in dataset:
+            print line
 
 
 
