@@ -1,9 +1,11 @@
-import numpy as np
-from numpy import array
+import numpy as np  #pip install numpy
+#from numpy import array
+from functools import reduce
 
-#filename = 'example.in'
-filename = 'small.in'
-#filename = 'medium.in'
+def factors(n):
+    return reduce(list.__add__,
+                ([i, n//i] for i in range(1, int(pow(n, 0.5) + 1)) if n % i == 0))
+
 
 def googleHash(filename):
     with open(filename) as dataset:
@@ -17,13 +19,12 @@ def googleHash(filename):
  of each ingredient per slice and maximum %s cells per slice. \n' \
          % (requirements[0], requirements[1], requirements[2], requirements[3])
 
-
-
         #Then, the remaining lines
         countM = 0
         countT = 0
         rowcount = 0
-        mynumarray = np.random.randn(int(requirements[0]),int(requirements[1]))
+        #theArray = np.random.randn(int(requirements[0]),int(requirements[1]))
+        theArray = np.empty(shape=(int(requirements[0]),int(requirements[1])))
         for line in dataset:
             #line = line.split
             lineList = []
@@ -35,30 +36,38 @@ def googleHash(filename):
                     countT+=1
                 lineList.append(line[count])
                 count+=1
-            print lineList
+            #print lineList
             for i in range (int(requirements[1])):
                 if lineList[i] == "T" :
                     lineList[i] = 0
                 if lineList[i] == "M" :
                     lineList[i] = 1
-            #lineList = np.array(lineList, dtype=str)
             #print lineList
-            #lineList = lineList.astype(np.float)
-            mynumarray[rowcount] = np.array(lineList, dtype=str)
-            #array2 =np.insert(mynumarray, lineList, axis=count)
-            #mynumarray[0] = np.array(lineList)
+            theArray[rowcount] = np.array(lineList, dtype=str)
 
-            #data_array = array( lineList )
-            #print data_array
             rowcount+=1
-        print mynumarray
+        print theArray, theArray.shape
         #print mynum
 
         print ' %s numbers of \'M\' \n %s numbers of \'T\' ' % (countM, countT)
 
-        #data_array2 = np.loadtxt(filename, dtype=str, skiprows=1)
-        #print data_array2
-        #data = np.loadtxt(filename, delimiter="\n", skiprows=1)
+        #Manipulating the numpy array, theArray
+        #test1 = theArray[:5, :5]
+        #print test1
+        n = int(requirements[3])
+        #print n
+        rectList = factors(n)
+        print len(rectList)
+        rectListcount = 0
+        while rectListcount < len(rectList) :
+            print rectList[rectListcount]
+            pizzarow = int(rectList[rectListcount])
+            rectListcount+=1
+            print rectList[rectListcount]
+            pizzacol = int(rectList[rectListcount])
+            pizzaArray = theArray[:pizzarow, :pizzacol]
+            print pizzaArray
+            rectListcount+=1
 
 
 
@@ -68,4 +77,8 @@ def googleHash(filename):
 
 
 
+
+#filename = 'example.in'
+#filename = 'small.in'
+filename = 'medium.in'
 googleHash(filename)
