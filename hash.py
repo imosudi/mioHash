@@ -58,6 +58,11 @@ def googleHash(filename):
         #print n
         rectList = factors(n)
         print len(rectList)
+
+        factorsKey, factorsValue = rectList[::2], rectList[1::2]
+        factorsDict = dict(zip(factorsKey, factorsValue)) #Mosudi: Create a dictionary factors
+        print factorsDict
+
         rectListcount = 0
         while rectListcount < len(rectList) :
             print rectList[rectListcount]
