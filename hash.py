@@ -64,22 +64,22 @@ def googleHash(filename):
         print factorsDict
 
 
-        #Manipulating the Dictionary
-        for key, value in factorsDict.iteritems():
-            pizzaArray = theArray[:key, :value]
-            #print pizzaArray
-            for v in range(int(requirements[1])):
-                #print key, v
-                #print theArray[:key, :v], theArray[:key, :v].shape
-                sliceSize = np.sum(theArray[:key, :v])
-                #print int(sliceSize), "\n"
-                #print theArray[:v, :key], theArray[:v, :key].shape
-                sliceSize = np.sum(theArray[:v, :key])
-                #print int(sliceSize), "\n\n"
-                v+=v
-        #print theArray, theArray.shape, "\n\n"
-
-
+        """#Manipulating the Dictionary
+                                for key, value in factorsDict.iteritems():
+                                    pizzaArray = theArray[:key, :value]
+                                    #print pizzaArray
+                                    for v in range(int(requirements[1])):
+                                        #print key, v
+                                        #print theArray[:key, :v], theArray[:key, :v].shape
+                                        sliceSize = np.sum(theArray[:key, :v])
+                                        #print int(sliceSize), "\n"
+                                        #print theArray[:v, :key], theArray[:v, :key].shape
+                                        sliceSize = np.sum(theArray[:v, :key])
+                                        #print int(sliceSize), "\n\n"
+                                        v+=v
+                                #print theArray, theArray.shape, "\n\n"
+                        
+                        """
         #theArray[startrow:endrow+1, starcol:endcol+1]
         #print theArray[0:3, 0:2], "0 0 3 2", "\n"
         valueRow=3
@@ -87,19 +87,19 @@ def googleHash(filename):
         initialCol=0
         initialRow=0
         #print theArray[initialRow:valueRow, initialCol:keyCol]
-        sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
+        #sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
         #print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
+        sumUp = int(requirements[3]) - int(requirements[2])
 
-        if keyCol*valueRow-int(requirements[2]) >= sumUp and sumUp > int(requirements[2]):
+        while keyCol*valueRow - int(requirements[2]) >= sumUp and sumUp > int(requirements[2]) and keyCol > initialCol :
+            #print initialCol, keyCol
             print theArray[initialRow:valueRow, initialCol:keyCol]
-            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
+            sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
+            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow), "\n", initialRow, initialCol, valueRow, keyCol
             print "True"
             initialCol+=keyCol
             keyCol+=1
-            print initialCol, keyCol
-            print theArray[0:valueRow, initialCol:keyCol]
-            sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
-            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
+            
 
 
 
