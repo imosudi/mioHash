@@ -5,6 +5,7 @@ from functools import reduce
 def factors(n):
     return reduce(list.__add__,
                 ([i, n//i] for i in range(1, int(pow(n, 0.5) + 1)) if n % i == 0))
+    
 
 
 def googleHash(filename):
@@ -39,21 +40,19 @@ def googleHash(filename):
             #print lineList
             for i in range (int(requirements[1])):
                 if lineList[i] == "T" :
-                    lineList[i] = 0
-                if lineList[i] == "M" :
                     lineList[i] = 1
+                if lineList[i] == "M" :
+                    lineList[i] = 0
             #print lineList
             theArray[rowcount] = np.array(lineList, dtype=str)
-
             rowcount+=1
-        print theArray, theArray.shape
+            
+        #print theArray, theArray.shape
         #print mynum
 
         print ' %s numbers of \'M\' \n %s numbers of \'T\' ' % (countM, countT)
 
-        #Manipulating the numpy array, theArray
-        #test1 = theArray[:5, :5]
-        #print test1
+
         n = int(requirements[3])
         #print n
         rectList = factors(n)
@@ -65,9 +64,48 @@ def googleHash(filename):
         print factorsDict
 
 
-        #Manipulating the Dictionary
-        for key, value in factorsDict.iteritems():
-        	print key, value
+        """#Manipulating the Dictionary
+                                for key, value in factorsDict.iteritems():
+                                    pizzaArray = theArray[:key, :value]
+                                    print pizzaArray
+                                    for v in range(int(requirements[1])):
+                                        print key, v
+                                        print theArray[:key, :v]
+                                        sliceSize = np.sum(theArray[:key, :v])
+                                        print int(sliceSize)
+                                        v+=v"""
+        print theArray
+
+        print "\n", theArray[0:1, 0:int(requirements[1])], \
+        int(np.sum(theArray[0:1, 0:int(requirements[1])]))
+
+        print "\n", theArray[0:2, 0:3], int(np.sum(theArray[0:2, 0:3]))
+
+        print "\n", theArray[0:3, 0:2], int(np.sum(theArray[0:3, 0:2])), "\n"
+
+        #theArray[0:3,1:3]
+        # [0:3] means all the rows from 0 to 3. 
+        #and [1:3] means all columns from column 1 to column 3
+
+        for irow in reversed(range( 2*int(requirements[2]),  int(requirements[1])+1, 1)):
+            print irow
+            print theArray[0:1, 0:irow], int(np.sum(theArray[0:1, 0:irow])), irow, "\n" #, \
+            #int(theArray[0:irow, 0:int(requirements[1])])
+
+
+        #Rough Work
+        #print theArray[0, :] 
+        #print theArray[0:0, 0:1]#, theArray[0:1, 2:2], theArray[0:1,1:3], 
+        #print theArray[0:1, 2:4] 
+        #print theArray[1, :], theArray[2, :]
+        #print theArray[:, 0::3]
+        #row:requirements[0] colum=requirements[1]
+        #print "\n", theArray[0:int(requirements[0]), 0:int(requirements[1])],\
+        #int(np.sum(theArray[0:int(requirements[0]), 0:int(requirements[1])]))
+
+        """print theArray[0:3, 0:int(requirements[1])]
+        print theArray[0:2, 0:int(requirements[1])]
+        print theArray[0:1, 0:int(requirements[1])]"""
 
         """rectListcount = 0
                                 while rectListcount < len(rectList) :
@@ -90,6 +128,6 @@ def googleHash(filename):
 
 
 #filename = 'example.in'
-#filename = 'small.in'
-filename = 'medium.in'
+filename = 'small.in'
+#filename = 'medium.in'
 googleHash(filename)
