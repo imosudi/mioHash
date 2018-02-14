@@ -76,20 +76,24 @@ def googleHash(filename):
                                         v+=v"""
         print theArray
 
-        print "\n", theArray[0:1, 0:int(requirements[1])], \
-        int(np.sum(theArray[0:1, 0:int(requirements[1])]))
-
-        print "\n", theArray[0:2, 0:3], int(np.sum(theArray[0:2, 0:3]))
-
-        print "\n", theArray[0:3, 0:2], int(np.sum(theArray[0:3, 0:2])), "\n"
+        """print "\n", theArray[0:1, 0:int(requirements[1])], \
+                                int(np.sum(theArray[0:1, 0:int(requirements[1])]))
+                        
+                                print "\n", theArray[0:2, 0:3], int(np.sum(theArray[0:2, 0:3]))
+                        
+                                print "\n", theArray[0:3, 0:2], int(np.sum(theArray[0:3, 0:2])), "\n"
+                                """
 
         #theArray[0:3,1:3]
         # [0:3] means all the rows from 0 to 3. 
         #and [1:3] means all columns from column 1 to column 3
 
-        for irow in reversed(range( 2*int(requirements[2]),  int(requirements[1])+1, 1)):
-            print irow
-            print theArray[0:1, 0:irow], int(np.sum(theArray[0:1, 0:irow])), irow, "\n" #, \
+        print " NUMPY ARRAY ITERATION"
+
+        for irow in reversed(range(int(requirements[2]),  int(requirements[1])+1, 1)):
+            print theArray[0:1, 0:irow], int(np.sum(theArray[0:1, 0:irow])), "\n" #, \
+            for icol in range(2*int(requirements[2]), int(requirements[0])):
+                print theArray[0:icol, 0:irow], int(np.sum(theArray[0:icol, 0:irow])) 
             #int(theArray[0:irow, 0:int(requirements[1])])
 
 
@@ -127,7 +131,7 @@ def googleHash(filename):
 
 
 
-#filename = 'example.in'
-filename = 'small.in'
-#filename = 'medium.in'
+filename = 'example.in'
+#filename = 'small.in'
+filename = 'medium.in'
 googleHash(filename)
