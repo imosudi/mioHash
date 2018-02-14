@@ -64,17 +64,57 @@ def googleHash(filename):
         print factorsDict
 
 
-        """#Manipulating the Dictionary
-                                for key, value in factorsDict.iteritems():
-                                    pizzaArray = theArray[:key, :value]
-                                    print pizzaArray
-                                    for v in range(int(requirements[1])):
-                                        print key, v
-                                        print theArray[:key, :v]
-                                        sliceSize = np.sum(theArray[:key, :v])
-                                        print int(sliceSize)
-                                        v+=v"""
-        print theArray
+        #Manipulating the Dictionary
+        for key, value in factorsDict.iteritems():
+            pizzaArray = theArray[:key, :value]
+            #print pizzaArray
+            for v in range(int(requirements[1])):
+                #print key, v
+                #print theArray[:key, :v], theArray[:key, :v].shape
+                sliceSize = np.sum(theArray[:key, :v])
+                #print int(sliceSize), "\n"
+                #print theArray[:v, :key], theArray[:v, :key].shape
+                sliceSize = np.sum(theArray[:v, :key])
+                #print int(sliceSize), "\n\n"
+                v+=v
+        #print theArray, theArray.shape, "\n\n"
+
+
+        #theArray[startrow:endrow+1, starcol:endcol+1]
+        #print theArray[0:3, 0:2], "0 0 3 2", "\n"
+        valueRow=3
+        keyCol = 2
+        initialCol=0
+        initialRow=0
+        #print theArray[initialRow:valueRow, initialCol:keyCol]
+        sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
+        #print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
+
+        if keyCol*valueRow-int(requirements[2]) >= sumUp and sumUp > int(requirements[2]):
+            print theArray[initialRow:valueRow, initialCol:keyCol]
+            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
+            print "True"
+            initialCol+=keyCol
+            keyCol+=1
+            print initialCol, keyCol
+            print theArray[0:valueRow, initialCol:keyCol]
+            sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
+            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
+
+
+
+
+            print "\n\n"
+
+
+
+
+        #print theArray[0:3, 2:3], "0 2 3 3", "\n"
+        #print theArray[0:3, 3:5], "0 3 3 5"
+
+
+
+
 
         """print "\n", theArray[0:1, 0:int(requirements[1])], \
                                 int(np.sum(theArray[0:1, 0:int(requirements[1])]))
@@ -90,11 +130,21 @@ def googleHash(filename):
 
         print " NUMPY ARRAY ITERATION"
 
-        for irow in reversed(range(int(requirements[2]),  int(requirements[1])+1, 1)):
-            print theArray[0:1, 0:irow], int(np.sum(theArray[0:1, 0:irow])), "\n" #, \
-            for icol in range(2*int(requirements[2]), int(requirements[0])):
-                print theArray[0:icol, 0:irow], int(np.sum(theArray[0:icol, 0:irow])) 
-            #int(theArray[0:irow, 0:int(requirements[1])])
+        """for irow in reversed(range(int(requirements[2]),  int(requirements[1])+1, 1)):
+                                    print theArray[0:1, 0:irow], int(np.sum(theArray[0:1, 0:irow])), "\n" #, \
+                                    for icol in range(2*int(requirements[2]), int(requirements[0])):
+                                        print theArray[0:icol, 0:irow], int(np.sum(theArray[0:icol, 0:irow])) 
+                                    #int(theArray[0:irow, 0:int(requirements[1])])"""
+
+        '''for key, value in factorsDict.iteritems():
+                                    #pizzaArray = theArray[0:key, 0:value]
+                                    #print pizzaArray
+                                    countRow=0
+                                    while countRow <= int(requirements[0]):
+                                        for irow in reversed(range(key, int(requirements[1])+1, value)):
+                                            print theArray[0:key, 0:irow], "\n", theArray[0:irow, 0:key], "\n\n"
+                                            countRow+=key'''
+
 
 
         #Rough Work
@@ -133,5 +183,5 @@ def googleHash(filename):
 
 filename = 'example.in'
 #filename = 'small.in'
-filename = 'medium.in'
+#filename = 'medium.in'
 googleHash(filename)
