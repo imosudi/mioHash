@@ -47,7 +47,7 @@ def googleHash(filename):
             theArray[rowcount] = np.array(lineList, dtype=str)
             rowcount+=1
             
-        #print theArray, theArray.shape
+        print theArray, theArray.shape
         #print mynum
 
         print ' %s numbers of \'M\' \n %s numbers of \'T\' ' % (countM, countT)
@@ -86,25 +86,61 @@ def googleHash(filename):
         keyCol = 2
         initialCol=0
         initialRow=0
+        rowwidth = 0
+        colwidth = 0
+        n = 1
         #print theArray[initialRow:valueRow, initialCol:keyCol]
         #sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
         #print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow)
         sumUp = int(requirements[3]) - int(requirements[2])
+        sliceNameList = []
 
-        while keyCol*valueRow - int(requirements[2]) >= sumUp and sumUp > int(requirements[2]) and keyCol > initialCol :
-            #print initialCol, keyCol
-            print theArray[initialRow:valueRow, initialCol:keyCol]
-            sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
-            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow), "\n", initialRow, initialCol, valueRow, keyCol
-            print "True"
-            initialCol+=keyCol
-            keyCol+=1
+        while keyCol*valueRow - int(requirements[2]) >= sumUp and \
+        sumUp > int(requirements[2]) and keyCol > initialCol :
+
             
+            newArray ='Slice' + str(n) 
+            exec("%s = %d" % (newArray,2))
+            #newArray = np.empty(shape=(valueRow, keyCol))
+            #print initialCol, keyCol
+            newArray=theArray[initialRow:valueRow, initialCol:keyCol]
+            sliceNameList.append(newArray)
+            #print theArray[initialRow:valueRow, initialCol:keyCol]
+            print newArray
+            #sumUp=np.sum(theArray[initialRow:valueRow, initialCol:keyCol])
+            sumUp=np.sum(newArray)
+            print int(sumUp), (keyCol - initialCol )* (valueRow- initialRow), "\n", \
+            initialRow, initialCol, valueRow, keyCol
+            #rowsize = int(theArray[initialRow:valueRow, initialCol:keyCol].shape[0])
+            #colsize = int(theArray[initialRow:valueRow, initialCol:keyCol].shape[1])
+            rowsize = int(newArray.shape[0])
+            colsize = int(newArray.shape[1])
+            if colsize*rowsize == sumUp:
+                print "No way"
+
+
+            #rowwidth+=rowsize
+            colwidth+=colsize
+            print str(rowsize)  + "    rowsize     " + str(colsize)   + "  colsize"
+            print "colwidth  " + str(colwidth) 
+
+            print "True"
+            initialCol=keyCol
+            keyCol+=1
+            n+=1
+
+
+
 
 
 
 
             print "\n\n"
+        print colsize, colwidth
+        print sliceNameList
+        for item in sliceNameList:
+            print list(item)
+        #print rowsize, rowwidth
 
 
 
